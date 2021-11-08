@@ -57,7 +57,7 @@
 									echo "<span class='badge badge-pill badge-primary'> Out for Delivery</span>";
 									break;
 								case '2':
-									echo "<span class='badge badge-pill badge-primary'> Arrived at Destination</span>";
+									echo "<span class='badge badge-pill badge-primary'> Item at Post Office</span>";
 									break;
 								case '3':
 									echo "<span class='badge badge-pill badge-info'> Picked up</span>";
@@ -65,9 +65,9 @@
 								case '4':
 									echo "<span class='badge badge-pill badge-danger'> Unsuccessful Delivery Attempt</span>";
 									break;
-								
+
 								default:
-									echo "<span class='badge badge-pill badge-info'> Item at Post Office</span>";
+									echo "<span class='badge badge-pill badge-danger'> Unknown status</span>";
 									
 									break;
 							}

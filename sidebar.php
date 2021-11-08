@@ -28,7 +28,7 @@
             <a href="#" class="nav-link nav-edit_branch">
               <i class="nav-icon fas fa-building"></i>
               <p>
-                Pick up station
+                Pick Up Stations
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -111,7 +111,7 @@
                 </a>
               </li>
               <?php 
-              $status_arr = array("Item Accepted<br/>by Client","Out for Delivery","Arrived At<br/>Destination","Picked-up","Unsuccessfull<br/>Delivery Attempt");
+              $status_arr = array("Item Accepted<br/>by Client","Out for Delivery","Item At<br/>Post Office","Picked-up","Unsuccessfull<br/>Delivery Attempt");
               foreach($status_arr as $k =>$v):
               ?>
               <li class="nav-item">
@@ -123,14 +123,35 @@
             <?php endforeach; ?>
             </ul>
           </li>
-           <li class="nav-item dropdown">
-            <a href="./index.php?page=track" class="nav-link nav-track">
-              <i class="nav-icon fas fa-search"></i>
+          <li class="nav-item">
+            <a href="#" class="nav-link nav-edit_staff">
+              <i class="nav-icon fas fa-map-pin"></i>
               <p>
-                Track Parcel
+                Tracking
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-          </li>  
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="./index.php?page=tracking" class="nav-link nav-new_staff tree-item">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>History Tracking</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./index.php?page=live_status" class="nav-link nav-staff_list tree-item">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Live Location</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./index.php?page=track" class="nav-link nav-staff_list tree-item">
+                  <i class="fas fa-angle-right nav-icon"></i>
+                  <p>Track Parcel</p>
+                </a>
+              </li>
+            </ul>
+          </li>   
            <li class="nav-item dropdown">
             <a href="./index.php?page=reports" class="nav-link nav-reports">
               <i class="nav-icon fas fa-file"></i>

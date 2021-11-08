@@ -8,60 +8,77 @@ if($_SESSION['login_type'] != 1)
 <?php if($_SESSION['login_type'] == 1): ?>
         <div class="row">
           <div class="col-12 col-sm-6 col-md-4">
-            <div class="small-box bg-light shadow-sm border">
-              <div class="inner">
-                <h3><?php echo $conn->query("SELECT * FROM branches")->num_rows; ?></h3>
-
-                <p>Pick up stations</p>
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-black elevation-1"><i class="fa fa-building"></i></span>
+              <div class="info-box-content">
+                  <span class="info-box-text">Pick Up Stations</span>
+                  <span class="info-box-number"><?php echo $conn->query("SELECT * FROM branches")->num_rows; ?></span>
               </div>
-              <div class="icon">
-                <i class="fa fa-building"></i>
-              </div>
+              <!-- /.info-box-content -->
             </div>
+            <!-- /.info-box -->
           </div>
            <div class="col-12 col-sm-6 col-md-4">
-            <div class="small-box bg-light shadow-sm border">
-              <div class="inner">
-                <h3><?php echo $conn->query("SELECT * FROM parcels")->num_rows; ?></h3>
-
-                <p>Total Parcels</p>
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-teal elevation-1"><i class="fa fa-boxes"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Total Parcels</span>
+                    <span class="info-box-number"><?php echo $conn->query("SELECT * FROM parcels")->num_rows; ?></span>
+                </div>
+                <!-- /.info-box-content -->
               </div>
-              <div class="icon">
-                <i class="fa fa-boxes"></i>
-              </div>
-            </div>
+              <!-- /.info-box -->
           </div>
-           <div class="col-12 col-sm-6 col-md-4">
-            <div class="small-box bg-light shadow-sm border">
-              <div class="inner">
-                <h3><?php echo $conn->query("SELECT * FROM users where type != 1")->num_rows; ?></h3>
-
-                <p>Total Staff</p>
+          <div class="col-12 col-sm-6 col-md-4">
+            <div class="info-box mb-3">
+              <span class="info-box-icon bg-warning elevation-1"><i class="fa fa-users text-white"></i></span>
+              <div class="info-box-content">
+                  <span class="info-box-text">Total Staff</span>
+                  <span class="info-box-number"><?php echo $conn->query("SELECT * FROM users where type != 1")->num_rows; ?></span>
               </div>
-              <div class="icon">
-                <i class="fa fa-users"></i>
-              </div>
+              <!-- /.info-box-content -->
             </div>
+            <!-- /.info-box -->
           </div>
           <hr>
-          <?php 
-              $status_arr = array("Out for Delivery","Arrived at Destination","Picked-up","Unsuccessfull Delivery Attempt","Item Accepted by Client");
-               foreach($status_arr as $k =>$v):
-          ?>
           <div class="col-12 col-sm-6 col-md-4">
-            <div class="small-box bg-light shadow-sm border">
-              <div class="inner">
-                <h3><?php echo $conn->query("SELECT * FROM parcels where status = {$k} ")->num_rows; ?></h3>
-
-                <p><?php echo $v ?></p>
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-success elevation-1"><i class="fa fa-user-secret"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Total Drivers</span>
+                    <span class="info-box-number"><?php echo $conn->query("SELECT * FROM users where type != 1")->num_rows; ?></span>
+                </div>
+                <!-- /.info-box-content -->
               </div>
-              <div class="icon">
-                <i class="fa fa-boxes"></i>
-              </div>
-            </div>
+              <!-- /.info-box -->
           </div>
-            <?php endforeach; ?>
-      </div>
+          <!-- /.col -->
+          <!-- fix for small devices only -->
+          <div class="clearfix hidden-md-up"></div>
+          <div class="col-12 col-sm-6 col-md-4">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-primary elevation-1"><i class="fa fa-user text-white"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Total Customers</span>
+                    <span class="info-box-number"><?php echo $conn->query("SELECT * FROM users where type != 1")->num_rows; ?></span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-12 col-sm-6 col-md-4">
+              <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-truck"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Today Trips</span>
+                    <span class="info-box-number"><?php echo $conn->query("SELECT * FROM users where type != 1")->num_rows; ?></span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+          </div>
+        </div>
 
 <?php else: ?>
 	 <div class="col-12">

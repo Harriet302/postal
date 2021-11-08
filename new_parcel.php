@@ -59,10 +59,10 @@
               <select name="from_branch_id" id="from_branch_id" class="form-control select2" required="">
                 <option value=""></option>
                 <?php 
-                  $branches = $conn->query("SELECT *,concat(street,', ',city,', ',state,', ',zip_code,', ',country) as address FROM branches");
+                  $branches = $conn->query("SELECT *, concat(street, ',' ,contact) as address FROM branches");
                     while($row = $branches->fetch_assoc()):
                 ?>
-                  <option value="<?php echo $row['id'] ?>" <?php echo isset($from_branch_id) && $from_branch_id == $row['id'] ? "selected":'' ?>><?php echo $row['branch_code']. ' | '.(ucwords($row['address'])) ?></option>
+                  <option value="<?php echo $row['id'] ?>" <?php echo isset($from_branch_id) && $from_branch_id == $row['id'] ? "selected":'' ?>><?php echo $row['station_name']. ' | '.(ucwords($row['address'])) ?></option>
                 <?php endwhile; ?>
               </select>
             </div>
@@ -74,10 +74,10 @@
               <select name="to_branch_id" id="to_branch_id" class="form-control select2">
                 <option value=""></option>
                 <?php 
-                  $branches = $conn->query("SELECT *,concat(street,', ',city,', ',state,', ',zip_code,', ',country) as address FROM branches");
+                  $branches = $conn->query("SELECT *, concat(street, ',' ,contact) as address FROM branches");
                     while($row = $branches->fetch_assoc()):
                 ?>
-                  <option value="<?php echo $row['id'] ?>" <?php echo isset($to_branch_id) && $to_branch_id == $row['id'] ? "selected":'' ?>><?php echo $row['branch_code']. ' | '.(ucwords($row['address'])) ?></option>
+                  <option value="<?php echo $row['id'] ?>" <?php echo isset($to_branch_id) && $to_branch_id == $row['id'] ? "selected":'' ?>><?php echo $row['station_name']. ' | '.(ucwords($row['address'])) ?></option>
                 <?php endwhile; ?>
               </select>
             </div>
@@ -129,7 +129,7 @@
   	</div>
   	<div class="card-footer border-top border-info">
   		<div class="d-flex w-100 justify-content-center align-items-center">
-  			<button class="btn btn-flat  bg-gradient-primary mx-2" form="manage-parcel">Save</button>
+  			<button class="btn btn-flat bg-gradient-primary mx-2" form="manage-parcel">Save</button>
   			<a class="btn btn-flat bg-gradient-secondary mx-2" href="./index.php?page=parcel_list">Cancel</a>
   		</div>
   	</div>

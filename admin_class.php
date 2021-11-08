@@ -79,6 +79,54 @@ Class Action {
 			return 1;
 		}
 	}
+	function save_staff()
+	{
+		extract($_POST);
+		$data = "";
+		foreach($_POST as $k => $v)
+		{
+			if(!in_array($k, array('id', 'password')) && !is_numeric($k))
+			{
+				if(empty($data))
+				{
+					$data .= " $k='$v' ";
+				}
+				else
+				{
+					$data .= ", $k='$v' ";
+				}
+			}
+		}
+		
+		if(!empty($password))
+		{
+			$data .= ", password=md5('$password')";
+
+		}
+		
+		$data .= ", type=2 ";
+		$check = $this->db->query("SELECT * FROM users where email ='$email' ".(!empty($id) ? " and id != {$id} " : ''))->num_rows;
+		if($check > 0)
+		{
+			return 2;
+			exit;
+		}
+
+		if(empty($id))
+		{
+			$save = $this->db->query("INSERT INTO users SET $data");
+		}
+		else
+		{
+			$save = $this->db->query("UPDATE users SET $data WHERE id = $id");
+		}
+
+		if($save)
+		{
+			return 1;
+		}
+	}
+
 	function signup(){
 		extract($_POST);
 		$data = "";
@@ -262,46 +310,63 @@ Class Action {
 			return 1;
 		}
 	}
-	function save_parcel(){
+	function save_parcel()
+	{
 		extract($_POST);
-		foreach($price as $k => $v){
+		foreach($price as $k => $v)
+		{
 			$data = "";
 			foreach($_POST as $key => $val){
-				if(!in_array($key, array('id','weight','height','width','length','price')) && !is_numeric($key)){
-					if(empty($data)){
+				if(!in_array($key, array('id', 'weight', 'height', 'width', 'length', 'price')) && !is_numeric($key))
+				{
+					if(empty($data))
+					{
 						$data .= " $key='$val' ";
-					}else{
+					}
+					else
+					{
 						$data .= ", $key='$val' ";
 					}
 				}
 			}
-			if(!isset($type)){
+
+			if(!isset($type))
+			{
 				$data .= ", type='2' ";
 			}
-				$data .= ", height='{$height[$k]}' ";
-				$data .= ", width='{$width[$k]}' ";
-				$data .= ", length='{$length[$k]}' ";
-				$data .= ", weight='{$weight[$k]}' ";
-				$price[$k] = str_replace(',', '', $price[$k]);
-				$data .= ", price='{$price[$k]}' ";
-			if(empty($id)){
+
+			$data .= ", height='{$height[$k]}' ";
+			$data .= ", width='{$width[$k]}' ";
+			$data .= ", length='{$length[$k]}' ";
+			$data .= ", weight='{$weight[$k]}' ";
+			$price[$k] = str_replace(',', '', $price[$k]);
+			$data .= ", price='{$price[$k]}' ";
+
+			if(empty($id))
+			{
 				$i = 0;
-				while($i == 0){
+				while($i == 0)
+				{
 					$ref = sprintf("%'012d",mt_rand(0, 999999999999));
 					$chk = $this->db->query("SELECT * FROM parcels where reference_number = '$ref'")->num_rows;
 					if($chk <= 0){
 						$i = 1;
 					}
 				}
+
 				$data .= ", reference_number='$ref' ";
 				if($save[] = $this->db->query("INSERT INTO parcels set $data"))
 					$ids[]= $this->db->insert_id;
-			}else{
+			}
+			else
+			{
 				if($save[] = $this->db->query("UPDATE parcels set $data where id = $id"))
 					$ids[] = $id;
 			}
 		}
-		if(isset($save) && isset($ids)){
+		
+		if(isset($save) && isset($ids))
+		{
 			// return json_encode(array('ids'=>$ids,'status'=>1));
 			return 1;
 		}
